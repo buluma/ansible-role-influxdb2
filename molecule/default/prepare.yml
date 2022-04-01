@@ -1,0 +1,7 @@
+---
+- name: prepare container
+  hosts: all
+  gather_facts: true
+  roles:
+    - role: buluma.bootstrap
+    - role: boutetnico.influxdb
