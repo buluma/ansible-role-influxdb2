@@ -1,5 +1,5 @@
 ---
 roles:
   - name: buluma.bootstrap
-  - name: boutetnico.influxdb
+  - name: buluma.influxdb2
 collections:
