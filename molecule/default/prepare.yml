@@ -6,4 +6,12 @@
   serial: 30%
   roles:
     - role: buluma.bootstrap
+    - role: buluma.service
     - role: boutetnico.influxdb
+
+  post_tasks:
+    - name: place /environmentfile.txt
+      ansible.builtin.copy:
+        content: "value=influxdb"
+        dest: /environmentfile.txt
+        mode: "0644"
