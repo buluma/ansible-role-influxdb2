@@ -3,6 +3,7 @@
   hosts: all
   roles:
     - role: buluma.apt_autostart
+      apt_autostart_state: enabled
     - role: boutetnico.influxdb
 
       influxdb_orgs:
