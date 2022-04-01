@@ -18,6 +18,10 @@ molecule:
         tag: "jessie"
       - image: "debian"
         tag: "stretch"
+      - image: "docker-ubuntu-systemd"
+        tag: "latest"
+      - image: "docker-ubuntu-systemd"
+        tag: "bionic"
 
 testing:
   script:
@@ -31,6 +35,10 @@ testing:
         tag: "jessie"
       - image: "debian"
         tag: "stretch"
+      - image: "docker-ubuntu-systemd"
+        tag: "latest"
+      - image: "docker-ubuntu-systemd"
+        tag: "bionic"
 
 galaxy:
   script:
