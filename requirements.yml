@@ -6,4 +6,5 @@ roles:
   - name: buluma.epel
   - name: buluma.buildtools
   - name: buluma.python_pip
+  - name: buluma.pip
 collections:
