@@ -1,25 +1,53 @@
 ---
-#
-# Ansible managed
-#
 dependency:
   name: galaxy
-  options:
-    role-file: requirements.yml
-    requirements-file: requirements.yml
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
+  enabled: False
+
 driver:
   name: docker
+
 platforms:
-  - name: "influxdb2-${image:-fedora}-${tag:-latest}${TOX_ENVNAME}"
-    image: "${namespace:-buluma}/${image:-fedora}:${tag:-latest}"
-    command: /sbin/init
+  - name: ansible-role-influxdb-debian-10
+    image: debian:10
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: yes
-    pre_build_image: yes
+  - name: ansible-role-influxdb-debian-11
+    image: debian:11
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ansible-role-influxdb-ubuntu-1804
+    image: ubuntu:18.04
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ansible-role-influxdb-ubuntu-2004
+    image: ubuntu:20.04
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+lint: |
+    yamllint .
+    ansible-lint
+    flake8
 provisioner:
   name: ansible
+
+verifier:
+  name: testinfra
+  env:
+    INFLUX_HOST: http://localhost:8086
