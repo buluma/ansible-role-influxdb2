@@ -18,16 +18,10 @@ molecule:
         tag: "stretch"
       - image: "debian"
         tag: "jessie"
-      - image: "ubuntu-python3"
-        tag: "latest"
-      - image: "systemd-ubuntu"
-        tag: "latest"
-      - image: "ubuntu-dev"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "focal"
+      - image: "ubuntu"
+        tag: "18.04"
+      - image: "ubuntu"
+        tag: "20.04"
 
 testing:
   script:
