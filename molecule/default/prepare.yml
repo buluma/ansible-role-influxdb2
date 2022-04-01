@@ -6,7 +6,7 @@
   serial: 30%
   roles:
     - role: buluma.bootstrap
-    - role: buluma.service
+    - role: buluma.apt_autostart
     - role: boutetnico.influxdb
 
   post_tasks:
