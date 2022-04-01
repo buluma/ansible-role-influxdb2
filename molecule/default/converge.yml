@@ -1,7 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    apt_autostart_state: enabled
   roles:
+    - role: buluma.apt_autostart
     - role: boutetnico.influxdb
 
       influxdb_orgs:

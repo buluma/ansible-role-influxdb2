@@ -14,34 +14,10 @@ molecule:
   retry: 1
   parallel:
     matrix:
-      - image: "amazonlinux"
-        tag: "latest"
-      - image: "enterpriselinux"
-        tag: "7"
-      - image: "enterpriselinux"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "bookworm"
-      - image: "fedora-systemd"
-        tag: "34"
-      - image: "fedora-systemd"
-        tag: "latest"
-      - image: "opensuse"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "docker-ubuntu-systemd"
-        tag: "focal"
       - image: "debian"
-        tag: "bullseye"
-      - image: "ubuntu"
-        tag: "20.04"
-      - image: "opensuse"
-        tag: "latest"
+        tag: "jessie"
+      - image: "debian"
+        tag: "stretch"
 
 testing:
   script:
@@ -51,28 +27,10 @@ testing:
   retry: 1
   parallel:
     matrix:
-      - image: "amazonlinux"
-        tag: "latest"
-      - image: "enterpriselinux"
-        tag: "7"
-      - image: "enterpriselinux"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "bookworm"
-      - image: "fedora-systemd"
-        tag: "34"
-      - image: "fedora-systemd"
-        tag: "latest"
-      - image: "opensuse"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "docker-ubuntu-systemd"
-        tag: "focal"
+      - image: "debian"
+        tag: "jessie"
+      - image: "debian"
+        tag: "stretch"
 
 galaxy:
   script:

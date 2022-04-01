@@ -62,8 +62,13 @@
     src: etc/influxdb/config.yml.j2
   notify: Restart InfluxDB
 
+# - name: Ensure InfluxDB service is in the desired state
+#   service:
+#     enabled: "{{ influxdb_service_enabled }}"
+#     name: "{{ influxdb_service_name }}"
+#     state: "{{ influxdb_service_state }}"
+
 - name: Ensure InfluxDB service is in the desired state
-  service:
-    enabled: "{{ influxdb_service_enabled }}"
+  ansible.builtin.service:
     name: "{{ influxdb_service_name }}"
-    state: "{{ influxdb_service_state }}"
+    state: started

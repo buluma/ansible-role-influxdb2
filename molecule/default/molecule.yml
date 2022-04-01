@@ -16,10 +16,18 @@ driver:
 platforms:
   - name: "influxdb2-${image:-fedora}-${tag:-latest}${TOX_ENVNAME}"
     image: "${namespace:-buluma}/${image:-fedora}:${tag:-latest}"
-    command: /sbin/init
+    command: /lib/systemd/systemd
+    tmpfs:
+      - /run
+      - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: yes
     pre_build_image: yes
 provisioner:
   name: ansible
+
+verifier:
+  name: testinfra
+  env:
+    INFLUX_HOST: http://localhost:8086

@@ -8,7 +8,7 @@ name: Ansible Molecule
 on:
   # Schedule updates (once daily)
   schedule:
-    - cron: '17 9 * * *'
+    - cron: '35 18 * * *'
   workflow_dispatch:
   push: {branches: ["master", "main", "testing"]}
 
@@ -36,28 +36,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - image: "amazonlinux"
-            tag: "latest"
-          - image: "enterpriselinux"
-            tag: "7"
-          - image: "enterpriselinux"
-            tag: "latest"
-          - image: "debian-systemd"
-            tag: "latest"
-          - image: "debian-systemd"
-            tag: "bookworm"
-          - image: "fedora-systemd"
-            tag: "34"
-          - image: "fedora-systemd"
-            tag: "latest"
-          - image: "opensuse"
-            tag: "latest"
-          - image: "docker-ubuntu-systemd"
-            tag: "latest"
-          - image: "docker-ubuntu-systemd"
-            tag: "bionic"
-          - image: "docker-ubuntu-systemd"
-            tag: "focal"
+          - image: "ubuntu"
+            tag: "18.04"
+          - image: "ubuntu"
+            tag: "20.04"
+          - image: "debian"
+            tag: "jessie"
+          - image: "debian"
+            tag: "stretch"
     steps:
       - name: checkout
         uses: actions/checkout@v3

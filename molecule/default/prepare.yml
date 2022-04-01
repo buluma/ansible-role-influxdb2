@@ -2,6 +2,19 @@
 - name: prepare container
   hosts: all
   gather_facts: true
+  become: yes
+  serial: 30%
+  vars:
+    apt_autostart_state: enabled
+
   roles:
     - role: buluma.bootstrap
+    - role: buluma.apt_autostart
     - role: boutetnico.influxdb
+
+  post_tasks:
+    - name: place /environmentfile.txt
+      ansible.builtin.copy:
+        content: "value=influxdb"
+        dest: /environmentfile.txt
+        mode: "0644"
