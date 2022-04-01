@@ -18,10 +18,6 @@ molecule:
         tag: "jessie"
       - image: "debian"
         tag: "stretch"
-      - image: "debian"
-        tag: "buster"
-      - image: "debian"
-        tag: "bullseye"
 
 testing:
   script:
@@ -35,10 +31,6 @@ testing:
         tag: "jessie"
       - image: "debian"
         tag: "stretch"
-      - image: "debian"
-        tag: "buster"
-      - image: "debian"
-        tag: "bullseye"
 
 galaxy:
   script:
