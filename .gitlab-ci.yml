@@ -70,11 +70,11 @@ testing:
 
 galaxy:
   script:
-    - ansible-galaxy role info buluma.influxdb-1
+    - ansible-galaxy role info buluma.influxdb2
 
 role_testing:
   script:
-    - image=${image} tag=${tag} ansible-galaxy install buluma.influxdb-1
+    - image=${image} tag=${tag} ansible-galaxy install buluma.influxdb2
   retry: 1
   parallel:
     matrix:

@@ -1,10 +1,10 @@
-# [influxdb-1](#influxdb-1)
+# [influxdb2](#influxdb2)
 
 Install and configure InfluxDB 2.0 using Ansible.
 
 |GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
 |------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-influxdb-1/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb-1/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-influxdb-1/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-influxdb-1)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/buluma/influxdb-1)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/buluma/influxdb-1)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb-1.svg)](https://github.com/buluma/ansible-role-influxdb-1/pulls/)|
+|[![github](https://github.com/buluma/ansible-role-influxdb2/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb2/actions)|[![gitlab](https://gitlab.com/buluma/ansible-role-influxdb2/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-influxdb2)|[![quality](https://img.shields.io/ansible/quality/58620)](https://galaxy.ansible.com/buluma/influxdb2)|[![downloads](https://img.shields.io/ansible/role/d/58620)](https://galaxy.ansible.com/buluma/influxdb2)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -14,7 +14,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 - name: Converge
   hosts: all
   roles:
-    - role: boutetnico.influxdb
+    - role: buluma.influxdb2
 
       influxdb_orgs:
         - name: main-org
@@ -36,6 +36,17 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           retention: 1d
         - name: bucket02
           org: main-org
+```
+
+The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
+```yaml
+---
+- name: prepare container
+  hosts: all
+  gather_facts: true
+  roles:
+    - role: buluma.bootstrap
+    - role: buluma.influxdb2
 ```
 
 
@@ -102,8 +113,16 @@ influxdb_service_state: started
 
 ## [Requirements](#requirements)
 
-- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-influxdb-1/blob/main/requirements.txt).
+- pip packages listed in [requirements.txt](https://github.com/buluma/ansible-role-influxdb2/blob/main/requirements.txt).
 
+## [Status of used roles](#status-of-requirements)
+
+The following roles are used to prepare a system. You can prepare your system in another way.
+
+| Requirement | GitHub | GitLab |
+|-------------|--------|--------|
+|[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
+|[buluma.influxdb2](https://galaxy.ansible.com/buluma/influxdb2)|[![Build Status GitHub](https://github.com/buluma/ansible-role-influxdb2/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb2/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-influxdb2/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-influxdb2)|
 
 ## [Context](#context)
 
@@ -111,7 +130,7 @@ This role is a part of many compatible roles. Have a look at [the documentation 
 
 Here is an overview of related roles:
 
-![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-influxdb-1/png/requirements.png "Dependencies")
+![dependencies](https://raw.githubusercontent.com/buluma/ansible-role-influxdb2/png/requirements.png "Dependencies")
 
 ## [Compatibility](#compatibility)
 
@@ -134,7 +153,7 @@ The minimum version of Ansible required is 2.7, tests have been done to:
 
 
 
-If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-influxdb-1/issues)
+If you find issues, please register them in [GitHub](https://github.com/buluma/ansible-role-influxdb2/issues)
 
 ## [License](#license)
 
