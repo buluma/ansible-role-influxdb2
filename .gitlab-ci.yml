@@ -36,6 +36,12 @@ molecule:
         tag: "bionic"
       - image: "docker-ubuntu-systemd"
         tag: "focal"
+      - image: "debian"
+        tag: "bullseye"
+      - image: "ubuntu"
+        tag: 20.04
+      - image: "opensuse"
+        tag: "latest"
 
 testing:
   script:
