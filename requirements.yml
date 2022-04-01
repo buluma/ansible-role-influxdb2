@@ -1,4 +1,5 @@
 ---
 roles:
   - name: buluma.influxdb
+  - name: buluma.apt_autostart
 collections:
