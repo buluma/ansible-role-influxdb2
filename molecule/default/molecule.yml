@@ -1,6 +1,7 @@
 ---
 #
 # Ansible managed
+# Inspired by boutetnico.influxdb
 #
 dependency:
   name: galaxy
@@ -27,7 +28,7 @@ platforms:
 provisioner:
   name: ansible
 
-verifier:
-  name: testinfra
-  env:
-    INFLUX_HOST: http://localhost:8086
+# verifier:
+#   name: testinfra
+#   env:
+#     INFLUX_HOST: http://localhost:8086
