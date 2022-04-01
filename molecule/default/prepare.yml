@@ -8,9 +8,7 @@
     apt_autostart_state: enabled
 
   roles:
-    - role: buluma.bootstrap
     - role: buluma.apt_autostart
-    - role: boutetnico.influxdb
 
   post_tasks:
     - name: place /environmentfile.txt
