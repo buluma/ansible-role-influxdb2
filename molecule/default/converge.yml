@@ -1,9 +1,12 @@
 ---
 - name: Converge
   hosts: all
+  gather_facts: true
+  become: yes
   vars:
     apt_autostart_state: enabled
   roles:
+    - role: buluma.python_pip
     - role: buluma.influxdb
 
       influxdb_orgs:

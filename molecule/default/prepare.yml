@@ -10,6 +10,9 @@
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
+    - role: buluma.epel
+    - role: buluma.buildtools
+    - role: buluma.python_pip
 
   post_tasks:
     - name: place /environmentfile.txt
