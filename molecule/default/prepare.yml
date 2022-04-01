@@ -4,6 +4,9 @@
   gather_facts: true
   become: yes
   serial: 30%
+  vars:
+    apt_autostart_state: enabled
+
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
