@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: influxdb
+  role_name: influxdb2
   namespace: buluma
   author: Michael Buluma
   description: Install and configure InfluxDB 2.0 using Ansible.
