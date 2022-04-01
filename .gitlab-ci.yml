@@ -17,11 +17,13 @@ molecule:
       - image: "debian"
         tag: "stretch"
       - image: "debian"
-        tag: "jessie"
+        tag: "bullseye"
+      - image: "debian"
+        tag: "buster"
       - image: "ubuntu"
-        tag: "18.04"
+        tag: "bionic"
       - image: "ubuntu"
-        tag: "20.04"
+        tag: "focal"
 
 testing:
   script:
