@@ -10,7 +10,6 @@
       - name: ipaddress
         version: "1.0.18"
       # Test installing a package by name.
-      - charset-normalizer
       - name: requests
 
   pre_tasks:
