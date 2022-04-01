@@ -39,7 +39,7 @@ molecule:
       - image: "debian"
         tag: "bullseye"
       - image: "ubuntu"
-        tag: 20.04
+        tag: "20.04"
       - image: "opensuse"
         tag: "latest"
 
