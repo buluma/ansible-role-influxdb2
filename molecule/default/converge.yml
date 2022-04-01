@@ -6,7 +6,6 @@
   vars:
     apt_autostart_state: enabled
   roles:
-    - role: buluma.python_pip
     - role: buluma.influxdb
 
       influxdb_orgs:
