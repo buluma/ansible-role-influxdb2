@@ -1,0 +1,8 @@
+---
+#
+# Ansible managed
+#
+repository:
+  description: Install and configure InfluxDB 2.0 using Ansible.
+  homepage: https://buluma.github.io/
+  topics: influx, influxdata, influxdb, ansible, molecule, tox, playbook, hacktoberfest

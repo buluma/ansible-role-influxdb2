@@ -1,0 +1,69 @@
+---
+- name: Install dependencies
+  apt:
+    name: "{{ influxdb_dependencies }}"
+    state: present
+    update_cache: true
+
+- name: Add InfluxData's key
+  apt_key:
+    state: present
+    url: "{{ influxdb_signing_key }}"
+
+- name: Manage InfluxData APT repositories
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop: "{{ influxdb_repositories }}"
+
+- name: Ensure InfluxDB packages are installed
+  apt:
+    name: "{{ item }}"
+    state: "{{ influxdb_package_state }}"
+    update_cache: true
+  loop: "{{ influxdb_packages }}"
+
+- name: Setup InfluxDB default file
+  template:
+    dest: /etc/default/influxdb2
+    group: root
+    mode: 0644
+    owner: root
+    src: etc/default/influxdb2.j2
+  notify: Restart InfluxDB
+
+- name: Ensure InfluxDB directories exist
+  file:
+    group: influxdb
+    mode: 0750
+    owner: influxdb
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ influxdb_config_path }}"
+    - "{{ influxdb_bolt_path | dirname }}"
+    - "{{ influxdb_engine_path }}"
+
+- name: Remove any previous InfluxDB configuration file
+  file:
+    path: "{{ influxdb_config_path }}/{{ item }}"
+    state: absent
+  loop:
+    - config.json
+    - config.toml
+  notify: Restart InfluxDB
+
+- name: Setup InfluxDB configuration file
+  template:
+    dest: "{{ influxdb_config_path }}/config.yml"
+    group: influxdb
+    mode: 0644
+    owner: influxdb
+    src: etc/influxdb/config.yml.j2
+  notify: Restart InfluxDB
+
+- name: Ensure InfluxDB service is in the desired state
+  service:
+    enabled: "{{ influxdb_service_enabled }}"
+    name: "{{ influxdb_service_name }}"
+    state: "{{ influxdb_service_state }}"
