@@ -10,7 +10,8 @@
       - name: ipaddress
         version: "1.0.18"
       # Test installing a package by name.
-      - requests
+      - name: requests
+        version: "2.27.1"
 
   pre_tasks:
     - name: Update apt cache.
