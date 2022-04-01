@@ -1,6 +1,7 @@
 ---
 #
 # Ansible managed
+# Inspired by boutetnico.influxdb
 #
 dependency:
   name: galaxy

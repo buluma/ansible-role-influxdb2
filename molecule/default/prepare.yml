@@ -8,6 +8,7 @@
     apt_autostart_state: enabled
 
   roles:
+    - role: buluma.bootstrap
     - role: buluma.apt_autostart
 
   post_tasks:
