@@ -9,6 +9,8 @@
       # Test installing a specific version of a package.
       - name: ipaddress
         version: "1.0.18"
+      # Install setuptools
+      - name: setuptools
       # Test installing a package by name.
       - name: requests
 
