@@ -16,14 +16,6 @@ molecule:
     matrix:
       - image: "debian"
         tag: "stretch"
-      - image: "debian"
-        tag: "bullseye"
-      - image: "debian"
-        tag: "buster"
-      - image: "ubuntu"
-        tag: "bionic"
-      - image: "ubuntu"
-        tag: "focal"
 
 testing:
   script:
