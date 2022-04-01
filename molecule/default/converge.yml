@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   roles:
-    - role: buluma.influxdb2
+    - role: boutetnico.influxdb
 
       influxdb_orgs:
         - name: main-org
