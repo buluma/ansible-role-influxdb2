@@ -15,13 +15,7 @@ molecule:
   parallel:
     matrix:
       - image: "debian"
-        tag: "jessie"
-      - image: "debian"
         tag: "stretch"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
 
 testing:
   script:
@@ -32,35 +26,7 @@ testing:
   parallel:
     matrix:
       - image: "debian"
-        tag: "jessie"
-      - image: "debian"
         tag: "stretch"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "amazonlinux"
-        tag: "latest"
-      - image: "enterpriselinux"
-        tag: "7"
-      - image: "enterpriselinux"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "latest"
-      - image: "debian-systemd"
-        tag: "bookworm"
-      - image: "fedora-systemd"
-        tag: "34"
-      - image: "fedora-systemd"
-        tag: "latest"
-      - image: "opensuse"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "latest"
-      - image: "docker-ubuntu-systemd"
-        tag: "bionic"
-      - image: "docker-ubuntu-systemd"
-        tag: "focal"
 
 galaxy:
   script:
