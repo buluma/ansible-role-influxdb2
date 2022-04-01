@@ -10,8 +10,6 @@
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
-    - role: buluma.epel
-    - role: buluma.buildtools
     - role: buluma.pip
 
   post_tasks:
