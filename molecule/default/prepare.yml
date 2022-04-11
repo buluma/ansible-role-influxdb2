@@ -10,9 +10,8 @@
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
-    - role: buluma.epel
-    - role: buluma.buildtools
     - role: buluma.pip
+    - name: buluma.influxdb2
 
   post_tasks:
     - name: place /environmentfile.txt
