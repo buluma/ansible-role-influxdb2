@@ -20,12 +20,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
     pip_package: python3-pip
     pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
     pip_install_packages:
-      # Test installing a specific version of a package.
-      - name: ipaddress
-        version: "1.0.18"
-      # Install setuptools
       - name: setuptools
-      # Test installing a package by name.
       - name: requests
 
   pre_tasks:
@@ -34,7 +29,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       when: ansible_os_family == 'Debian'
 
     - name: Set package name for older OSes.
-      set_fact:
+      ansible.builtin.set_fact:
         pip_package: python-pip
       when: >
         (ansible_os_family == 'RedHat') and (ansible_distribution_major_version | int < 8)
@@ -43,8 +38,8 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
   roles:
     - role: buluma.bootstrap
     - role: buluma.pip
+    - role: buluma.apt_autostart
     - role: buluma.influxdb2
-
       influxdb_orgs:
         - name: main-org
           description: Main organization
@@ -82,6 +77,7 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
     - role: buluma.pip
+    - name: buluma.influxdb2
 
   post_tasks:
     - name: place /environmentfile.txt
@@ -163,9 +159,8 @@ The following roles are used to prepare a system. You can prepare your system in
 
 | Requirement | GitHub | GitLab |
 |-------------|--------|--------|
-|[buluma.influxdb2](https://galaxy.ansible.com/buluma/influxdb2)|[![Build Status GitHub](https://github.com/buluma/ansible-role-influxdb2/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb2/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-influxdb2/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-influxdb2)|
-|[buluma.apt_autostart](https://galaxy.ansible.com/buluma/apt_autostart)|[![Build Status GitHub](https://github.com/buluma/ansible-role-apt_autostart/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-apt_autostart/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-apt_autostart/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-apt_autostart)|
 |[buluma.bootstrap](https://galaxy.ansible.com/buluma/bootstrap)|[![Build Status GitHub](https://github.com/buluma/ansible-role-bootstrap/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-bootstrap/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-bootstrap/badges/main/pipeline.svg)](https://gitlab.com/buluma/ansible-role-bootstrap)|
+|[buluma.apt_autostart](https://galaxy.ansible.com/buluma/apt_autostart)|[![Build Status GitHub](https://github.com/buluma/ansible-role-apt_autostart/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-apt_autostart/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-apt_autostart/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-apt_autostart)|
 |[buluma.pip](https://galaxy.ansible.com/buluma/pip)|[![Build Status GitHub](https://github.com/buluma/ansible-role-pip/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-pip/actions)|[![Build Status GitLab ](https://gitlab.com/buluma/ansible-role-pip/badges/master/pipeline.svg)](https://gitlab.com/buluma/ansible-role-pip)|
 
 ## [Context](#context)

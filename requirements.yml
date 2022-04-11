@@ -1,7 +1,6 @@
 ---
 roles:
-  - name: buluma.influxdb2
-  - name: buluma.apt_autostart
   - name: buluma.bootstrap
+  - name: buluma.apt_autostart
   - name: buluma.pip
 collections:

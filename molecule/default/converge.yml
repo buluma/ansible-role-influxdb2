@@ -8,12 +8,7 @@
     pip_package: python3-pip
     pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
     pip_install_packages:
-      # Test installing a specific version of a package.
-      - name: ipaddress
-        version: "1.0.18"
-      # Install setuptools
       - name: setuptools
-      # Test installing a package by name.
       - name: requests
 
   pre_tasks:
@@ -31,8 +26,8 @@
   roles:
     - role: buluma.bootstrap
     - role: buluma.pip
+    - role: buluma.apt_autostart
     - role: buluma.influxdb2
-
       influxdb_orgs:
         - name: main-org
           description: Main organization
