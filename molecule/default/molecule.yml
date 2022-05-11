@@ -15,8 +15,10 @@ lint: |
 driver:
   name: docker
 platforms:
-  - name: "influxdb2-${image:-fedora}-${tag:-latest}${TOX_ENVNAME}"
-    image: "${namespace:-buluma}/${image:-fedora}:${tag:-latest}"
+  - name: "influxdb2-${image:-docker-centos7-ansible}-${tag:-latest}${TOX_ENVNAME}"
+    image: "${namespace:-buluma}/${image:-docker-centos7-ansible}:${tag:-latest}"
+    published_ports:
+      - 8086/tcp
     command: /lib/systemd/systemd
     tmpfs:
       - /run
@@ -28,7 +30,7 @@ platforms:
 provisioner:
   name: ansible
 
-# verifier:
-#   name: testinfra
-#   env:
-#     INFLUX_HOST: http://localhost:8086
+verifier:
+  name: testinfra
+  env:
+    INFLUX_HOST: http://localhost:8086
