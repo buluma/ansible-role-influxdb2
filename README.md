@@ -147,6 +147,8 @@ influxdb_buckets: []
 influxdb_service_enabled: true
 
 influxdb_service_state: started
+
+influxdb_skip_onboarding: false
 ```
 
 ## [Requirements](#requirements)
