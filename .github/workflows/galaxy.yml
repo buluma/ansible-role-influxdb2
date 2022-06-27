@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: galaxy
-        uses: buluma/galaxy-action@v1.0.3
+        uses: buluma/galaxy-action@v6.25.22
         with:
           galaxy_api_key: ${{ secrets.galaxy_api_key }}
           git_branch: master
