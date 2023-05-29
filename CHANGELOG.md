@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/buluma/ansible-role-influxdb2/tree/HEAD)
 
-[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.4...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.6...HEAD)
+
+**Fixed bugs:**
+
+- Latest version number missing 'v' prefix [\#20](https://github.com/buluma/ansible-role-influxdb2/issues/20)
+
+## [v0.1.6](https://github.com/buluma/ansible-role-influxdb2/tree/v0.1.6) (2022-09-16)
+
+[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.4...v0.1.6)
 
 **Closed issues:**
 
