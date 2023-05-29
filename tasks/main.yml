@@ -1,5 +1,7 @@
 ---
-- include_tasks: setup.yml
+- name: Run Setup
+  ansible.builtin.include_tasks: setup.yml
 
-- include_tasks: configure.yml
+- name: Configure
+  ansible.builtin.include_tasks: configure.yml
   when: influxdb_service_state == "started" and not influxdb_skip_onboarding

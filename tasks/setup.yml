@@ -6,7 +6,7 @@
     update_cache: true
   when: ansible_os_family == 'Debian'
 
-- name: Install python3-dnf
+- name: setup | Install python3-dnf
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
