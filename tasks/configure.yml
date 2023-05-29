@@ -1,6 +1,6 @@
 ---
-- name: Ensure InfluxDB is up and running
-  command: influx ping \
+- name: configure | Ensure InfluxDB is up and running
+  ansible.builtin.command: influx ping \
     --host "{{ influxdb_host }}"
   retries: 10
   delay: 5
@@ -8,8 +8,8 @@
   until: _ping.rc == 0
   changed_when: false
 
-- name: Set InfluxDB default user, organization, and bucket
-  command: influx setup \
+- name: configure | Set InfluxDB default user, organization, and bucket
+  ansible.builtin.command: influx setup \
     --host "{{ influxdb_host }}" \
     --org {{ influxdb_primary_org }} \
     --bucket {{ influxdb_primary_bucket }} \
@@ -23,8 +23,8 @@
     - '"has already been set up" not in _setup.stderr'
   changed_when: _setup.rc == 0
 
-- name: Ensure organizations exist
-  command: influx org create \
+- name: configure | Ensure organizations exist
+  ansible.builtin.command: influx org create \
     --host "{{ influxdb_host }}" \
     --name "{{ item.name }}" \
     --description "{{ item.description | d('') }}"
@@ -37,8 +37,8 @@
     - '"already exists" not in _org.stderr'
   changed_when: _org.rc == 0
 
-- name: Ensure users exist
-  command: influx user create \
+- name: configure | Ensure users exist
+  ansible.builtin.command: influx user create \
     --host "{{ influxdb_host }}" \
     --name "{{ item.name }}" \
     --org "{{ item.org }}" \
@@ -52,8 +52,8 @@
     - '"already exists" not in _user.stderr'
   changed_when: _user.rc == 0
 
-- name: Ensure buckets exist
-  command: influx bucket create \
+- name: configure | Ensure buckets exist
+  ansible.builtin.command: influx bucket create \
     --host "{{ influxdb_host }}" \
     --name "{{ item.name }}" \
     --description "{{ item.description | d('') }}" \

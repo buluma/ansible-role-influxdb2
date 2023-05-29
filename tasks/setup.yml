@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies
+- name: setup | Install dependencies
   ansible.builtin.package:
     name: "{{ influxdb_dependencies }}"
     state: present
@@ -15,20 +15,20 @@
     - tar
   when: ansible_os_family == 'RedHat'
 
-- name: Add InfluxData's key
+- name: setup | Add InfluxData's key
   ansible.builtin.apt_key:
     state: present
     url: "{{ influxdb_signing_key }}"
   when: ansible_os_family == 'Debian'
 
-- name: Manage InfluxData APT repositories
+- name: setup | Manage InfluxData APT repositories
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   loop: "{{ influxdb_repositories }}"
   when: ansible_os_family == 'Debian'
 
-- name: Manage InfluxData Yum repositories
+- name: setup | Manage InfluxData Yum repositories
   ansible.builtin.yum_repository:
     name: InfluxDB Repository - RHEL \$releasever
     description: InfluxDB Repository - RHEL \$releasever
@@ -37,7 +37,7 @@
     gpgcheck: no
   when: ansible_os_family == 'RedHat'
 
-- name: Ensure InfluxDB packages are installed | Apt
+- name: setup | Ensure InfluxDB packages are installed | Apt
   ansible.builtin.apt:
     name: "{{ item }}"
     state: "{{ influxdb_package_state }}"
@@ -66,7 +66,7 @@
 #     dest: /tmp
 #     remote_src: yes
 
-- name: Unarchive a file that is already on the remote machine
+- name: setup | Unarchive a file that is already on the remote machine
   ansible.builtin.command: |
     cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
     [influxdb]
@@ -77,7 +77,7 @@
     gpgkey = https://repos.influxdata.com/influxdb.key
     EOF
 
-- name: install RedHat
+- name: setup | Install RedHat
   command: |
     sudo yum install influxdb2
 
@@ -86,7 +86,7 @@
 #     wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-linux-arm64.tar.gz && tar xvfz influxdb2-2.4.0-linux-arm64.tar.gz
 #   when: ansible_os_family == 'RedHat'
 
-- name: Setup InfluxDB default file
+- name: setup | Setup InfluxDB default file
   ansible.builtin.template:
     dest: /etc/default/influxdb2
     group: root
@@ -95,13 +95,13 @@
     src: etc/default/influxdb2.j2
   notify: Restart InfluxDB
 
-- name: create influxdb system group
+- name: setup | Create influxdb system group
   ansible.builtin.group:
     name: influxdb
     system: true
     state: present
 
-- name: create influxdb system user
+- name: setup | Create influxdb system user
   ansible.builtin.user:
     name: influxdb
     system: true
@@ -110,7 +110,7 @@
     # createhome: false
     # home: "{{ prometheus_db_dir }}"
 
-- name: Ensure InfluxDB directories exist
+- name: setup | Ensure InfluxDB directories exist
   ansible.builtin.file:
     group: influxdb
     mode: 0750
@@ -122,7 +122,7 @@
     - "{{ influxdb_bolt_path | dirname }}"
     - "{{ influxdb_engine_path }}"
 
-- name: Remove any previous InfluxDB configuration file
+- name: setup | Remove any previous InfluxDB configuration file
   ansible.builtin.file:
     path: "{{ influxdb_config_path }}/{{ item }}"
     state: absent
@@ -131,7 +131,7 @@
     - config.toml
   notify: Restart InfluxDB
 
-- name: Setup InfluxDB configuration file
+- name: setup | Setup InfluxDB configuration file
   ansible.builtin.template:
     dest: "{{ influxdb_config_path }}/config.yml"
     group: influxdb
@@ -140,8 +140,8 @@
     src: etc/influxdb/config.yml.j2
   notify: Restart InfluxDB
 
-- name: Ensure InfluxDB service is in the desired state
-  service:
+- name: setup | Ensure InfluxDB service is in the desired state
+  ansible.builtin.service:
     enabled: "{{ influxdb_service_enabled }}"
     name: "{{ influxdb_service_name }}"
     state: "{{ influxdb_service_state }}"
