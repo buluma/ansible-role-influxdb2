@@ -78,7 +78,7 @@
     EOF
 
 - name: setup | Install RedHat
-  ansible.builtincommand: |
+  ansible.builtin.command: |
     sudo yum install influxdb2
 
 # - name: Ensure InfluxDB packages are installed | RedHat
