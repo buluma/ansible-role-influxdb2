@@ -8,18 +8,13 @@ name: "TODO 2 Issue"
 on:
   push:
 
-concurrency:
-  group: ${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: "ubuntu-20.04"
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: "actions/checkout@master"
       - name: "TODO to Issue"
-        uses: "buluma/todo-to-issue-action@v1.0.1"
+        uses: "alstr/todo-to-issue-action@v2.3" # TODO: Update buluma/todo-to-issue-action@v1.0.1 @buluma
         id: "todo"
         with:
-          USER_PROJECTS: buluma/Ansible/To do
-          PROJECTS_SECRET: ${{ secrets.PROJECTS_SECRET }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}

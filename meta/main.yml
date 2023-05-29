@@ -4,7 +4,7 @@ galaxy_info:
   author: buluma
   description: Install and configure InfluxDB 2.0 using Ansible.
   license: MIT
-  min_ansible_version: "2.10"
+  min_ansible_version: "2.12"
   platforms:
     - name: Debian
       versions:

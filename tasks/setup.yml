@@ -6,6 +6,15 @@
     update_cache: true
   when: ansible_os_family == 'Debian'
 
+- name: Install python3-dnf
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - wget
+    - tar
+  when: ansible_os_family == 'RedHat'
+
 - name: Add InfluxData's key
   ansible.builtin.apt_key:
     state: present
@@ -19,13 +28,63 @@
   loop: "{{ influxdb_repositories }}"
   when: ansible_os_family == 'Debian'
 
-- name: Ensure InfluxDB packages are installed
+- name: Manage InfluxData Yum repositories
+  ansible.builtin.yum_repository:
+    name: InfluxDB Repository - RHEL \$releasever
+    description: InfluxDB Repository - RHEL \$releasever
+    baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+    enabled: yes
+    gpgcheck: no
+  when: ansible_os_family == 'RedHat'
+
+- name: Ensure InfluxDB packages are installed | Apt
   ansible.builtin.apt:
     name: "{{ item }}"
     state: "{{ influxdb_package_state }}"
     update_cache: true
   loop: "{{ influxdb_packages }}"
   when: ansible_os_family == 'Debian'
+
+# - name: Ensure InfluxDB packages are installed | Yum
+#   ansible.builtin.yum:
+#     name: "{{ item }}"
+#     state: "{{ influxdb_package_state }}"
+#     update_cache: true
+#   loop: "{{ influxdb_packages }}"
+#   when: ansible_os_family == 'RedHat'
+
+# - name: Ensure InfluxDB packages are installed | Package
+#   ansible.builtin.dnf:
+#     name: "{{ item }}"
+#     state: "{{ influxdb_package_state }}"
+#     update_cache: true
+#   loop: "{{ influxdb_packages }}"
+
+# - name: Unarchive a file that needs to be downloaded (added in 2.0)
+#   ansible.builtin.unarchive:
+#     src: https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-linux-arm64.tar.gz
+#     dest: /tmp
+#     remote_src: yes
+
+- name: Unarchive a file that is already on the remote machine
+  ansible.builtin.command: |
+    cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
+    [influxdb]
+    name = InfluxDB Repository - RHEL \$releasever
+    baseurl = https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+    enabled = 1
+    gpgcheck = 1
+    gpgkey = https://repos.influxdata.com/influxdb.key
+    EOF
+
+- name: install RedHat
+  command: |
+    sudo yum install influxdb2
+
+# - name: Ensure InfluxDB packages are installed | RedHat
+#   command: |
+#     wget https://dl.influxdata.com/influxdb/releases/influxdb2-2.4.0-linux-arm64.tar.gz && tar xvfz influxdb2-2.4.0-linux-arm64.tar.gz
+#   when: ansible_os_family == 'RedHat'
 
 - name: Setup InfluxDB default file
   ansible.builtin.template:
