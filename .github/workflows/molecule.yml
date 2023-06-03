@@ -42,6 +42,16 @@ jobs:
         config:
           - image: "debian-systemd"
             tag: "latest"
+          - image: "docker-ubuntu-systemd"
+            tag: "latest"
+          - image: "docker-ubuntu-systemd"
+            tag: "focal"
+          - image: "docker-ubuntu-systemd"
+            tag: "bionic"
+          - image: "docker-ubuntu-systemd"
+            tag: "lunar"
+          - image: "kali"
+            tag: "latest"
     steps:
       - name: checkout
         uses: actions/checkout@v3
