@@ -1,10 +1,10 @@
-# [influxdb2](#influxdb2)
+# [Ansible role influxdb2](#influxdb2)
 
 Install and configure InfluxDB 2.0 using Ansible.
 
-|GitHub|GitLab|Quality|Downloads|Version|Issues|Pull Requests|
-|------|------|-------|---------|-------|------|-------------|
-|[![github](https://github.com/buluma/ansible-role-influxdb2/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb2/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-influxdb2/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-influxdb2)|[![quality](https://img.shields.io/ansible/quality/58620)](https://galaxy.ansible.com/buluma/influxdb2)|[![downloads](https://img.shields.io/ansible/role/d/58620)](https://galaxy.ansible.com/buluma/influxdb2)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/pulls/)|
+|GitHub|GitLab|Downloads|Version|Issues|Pull Requests|
+|------|------|-------|-------|------|-------------|
+|[![github](https://github.com/buluma/ansible-role-influxdb2/workflows/Ansible%20Molecule/badge.svg)](https://github.com/buluma/ansible-role-influxdb2/actions)|[![gitlab](https://gitlab.com/shadowwalker/ansible-role-influxdb2/badges/master/pipeline.svg)](https://gitlab.com/shadowwalker/ansible-role-influxdb2)|[![downloads](https://img.shields.io/ansible/role/d/4736)](https://galaxy.ansible.com/buluma/influxdb2)|[![Version](https://img.shields.io/github/release/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/releases/)|[![Issues](https://img.shields.io/github/issues/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/issues/)|[![PullRequests](https://img.shields.io/github/issues-pr-closed-raw/buluma/ansible-role-influxdb2.svg)](https://github.com/buluma/ansible-role-influxdb2/pulls/)|
 
 ## [Example Playbook](#example-playbook)
 

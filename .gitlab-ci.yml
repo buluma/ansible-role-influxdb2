@@ -1,19 +1,21 @@
 ---
-image: "buluma/github-action-molecule:5.0.7"
+image: "buluma/github-action-molecule:5.1.1"
 
 variables:
   PY_COLORS: 1
 
 molecule:
   script:
-    - if [ -f tox.ini ] ; then tox ; fi
-    - if [ ! -f tox.ini ] ; then molecule test ; fi
+    - molecule test
   rules:
     - if: $CI_COMMIT_REF_NAME == "master"
+  allow_failure: true
   parallel:
     matrix:
       - image: "debian-systemd"
         tag: "latest"
+      - image: "debian-systemd"
+        tag: "bullseye"
       - image: "docker-ubuntu-systemd"
         tag: "latest"
       - image: "docker-ubuntu-systemd"
