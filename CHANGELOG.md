@@ -8,6 +8,11 @@
 
 - Latest version number missing 'v' prefix [\#20](https://github.com/buluma/ansible-role-influxdb2/issues/20)
 
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#22](https://github.com/buluma/ansible-role-influxdb2/issues/22)
+- Update action [\#21](https://github.com/buluma/ansible-role-influxdb2/issues/21)
+
 ## [v0.1.6](https://github.com/buluma/ansible-role-influxdb2/tree/v0.1.6) (2022-09-16)
 
 [Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.4...v0.1.6)
