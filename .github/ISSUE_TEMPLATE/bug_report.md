@@ -28,4 +28,3 @@ Show at least the error, possible related output, maybe just all the output.
 - Control node Ansible version: [e.g. 2.9.1] (`ansible --version`)
 - Managed node OS: [e.g. CentOS 7] (`cat /etc/os-release`)
 
-Please consider [sponsoring me](https://github.com/sponsors/buluma).
