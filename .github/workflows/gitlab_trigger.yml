@@ -19,7 +19,7 @@ jobs:
           channel: "#ansible"
           message: Starting buluma.influxdb2 GitLab Trigger...
         if: always()
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Mirror + trigger CI
         uses: buluma/gitlab-mirror-ci-action@1.0.6
         with:

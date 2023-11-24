@@ -42,13 +42,13 @@ jobs:
 
     steps:
       - name: Checkout dj-wasabi-release repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: dj-wasabi/dj-wasabi-release
           path: dj-wasabi-release
 
       - name: Checkout current repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: master
 
