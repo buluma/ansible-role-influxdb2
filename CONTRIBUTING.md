@@ -17,7 +17,7 @@ Here is how you can help, a lot of steps are related to GitHub, not specifically
 
 When you spot an issue, [create an issue](https://github.com/buluma/ansible-role-influxdb2/issues).
 
-Making the issue help me and others to find similar problems in the future.
+Raising the issue helps me and others to find similar problems and solutions in the future.
 
 ### [2. Fork the project.](#2-fork-the-project)
 
@@ -33,7 +33,7 @@ I typically do that by cloning the repository (in your namespace) locally:
 git clone git@github.com:YOURNAMESPACE/ansible-role-influxdb2.git
 ```
 
-Now you can start to edit on your laptop.
+Now you can start to edit on your laptop/PC.
 
 ### [4. Optionally: test your changes](#4-optionally-test-your-changes)
 
@@ -69,8 +69,7 @@ In the comment-box, you can [refer to the issue number](https://help.github.com/
 
 ### [7. Wait](#7-wait)
 
-Now I'll get a message that you've added some code. Thank you, really.
+Now I'll get a message that you've added some code. Thank you, trully.
 
-CI starts to test your changes. You can follow the progress on GitHub.
+CI starts to test your changes once pull request is reviewed. You can follow the progress on GitHub.
 
-Please consider [sponsoring me](https://github.com/sponsors/buluma).
