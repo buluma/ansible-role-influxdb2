@@ -7,6 +7,15 @@ name: "TODO 2 Issue"
 
 on:
   push:
+    branches:
+      - master
+      - main
+      - testing
+    paths-ignore:
+      - '**/README.md'
+      - '**/CHANGELOG.md'
+    tags_ignore:
+      - '*'
 
 jobs:
   build:
