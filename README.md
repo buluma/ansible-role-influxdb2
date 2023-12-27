@@ -64,7 +64,7 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 ```yaml
 ---
-- name: prepare container
+- name: Prepare container
   hosts: all
   gather_facts: true
   become: yes
