@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/buluma/ansible-role-influxdb2/tree/HEAD)
+
+[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/0.1.7...HEAD)
+
+**Closed issues:**
+
+- Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#25](https://github.com/buluma/ansible-role-influxdb2/issues/25)
+
 ## [0.1.7](https://github.com/buluma/ansible-role-influxdb2/tree/0.1.7) (2023-12-09)
 
 [Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.6...0.1.7)
