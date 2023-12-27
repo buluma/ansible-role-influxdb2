@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
       - name: "TODO to Issue"
-        uses: "buluma/todo-to-issue-action@v2.0.0"
+        uses: "buluma/todo-to-issue-action@v2.0.1"
         id: "todo"
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
