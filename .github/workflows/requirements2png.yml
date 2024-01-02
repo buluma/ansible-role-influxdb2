@@ -3,11 +3,16 @@
 # Ansible managed
 #
 
+name: Ansible Graphviz
 on:
   push:
+    branches:
+      - master
+      - main
     paths:
       - '.github/workflows/requirements2png.yml'
-name: Ansible Graphviz
+    tags_ignore:
+      - '*'
 
 jobs:
   build:

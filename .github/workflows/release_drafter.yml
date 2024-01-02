@@ -7,7 +7,7 @@ name: Release Drafter
 
 on:
   push:
-    # branches to consider in the event; optional, defaults to all
+    # branches to consider in the event; optional, defaults to default
     branches:
       - master
       - main
@@ -20,21 +20,30 @@ on:
     # Only following types are handled by the action, but one can default to all as well
     types: [opened, reopened, synchronize]
 
+permissions:
+  contents: write
+
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
   update_release_draft:
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+      # write permission is required for autolabeler
+      # otherwise, read permission is required at least
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
       - uses: release-drafter/release-drafter@v5
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-        # with:
-        #   config-name: my-config.yml
-        #   disable-autolabeler: true
+        with:
+          config-name: release-drafter.yml
+          disable-autolabeler: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   changelog_draft:
@@ -42,21 +51,20 @@ jobs:
 
     steps:
       - name: Checkout dj-wasabi-release repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: dj-wasabi/dj-wasabi-release
           path: dj-wasabi-release
 
       - name: Checkout current repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          path: master
-
+          path: ${{ github.event.repository.default_branch }}
       - name: Commit Changelog file
         run: |
-          # We are cloned in the 'main' directory and the dj-wasabi-release
-          # repository is the 'dj-wasabi-release' next to 'main'
-          cd master
+          # We are cloned in the 'default' directory and the dj-wasabi-release
+          # repository is the 'dj-wasabi-release' next to 'default'
+          cd ${{ github.event.repository.default_branch }}
           # Generate CHANGELOG.md file
           ../dj-wasabi-release/release.sh -d
           # Let commit the changes if there are any? (Well there should be!)

@@ -10,7 +10,6 @@ on:
     branches:
       - master
       - main
-      - testing
     paths-ignore:
       - '**/README.md'
       - '**/CHANGELOG.md'
@@ -23,7 +22,7 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
       - name: "TODO to Issue"
-        uses: "buluma/todo-to-issue-action@v2.0.0"
+        uses: "buluma/todo-to-issue-action@v2.0.2"
         id: "todo"
         with:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
