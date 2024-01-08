@@ -17,11 +17,15 @@ on:
     tags_ignore:
       - '*'
   pull_request:
+  pull_request_target:
   schedule:
-    - cron: '17 9 9 * *'
+    # - cron: '17 9 9 * *'
+    - cron: '17 9 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+permissions: write-all
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -65,3 +69,25 @@ jobs:
         with:
           image: ${{ matrix.config.image }}
           tag: ${{ matrix.config.tag }}
+
+  dependabot:
+    needs: test
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'buluma' && github.event_name == 'pull_request'}}
+    steps:
+      - uses: "actions/checkout@master"
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Approve a PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Merge Dependabot PR"
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
