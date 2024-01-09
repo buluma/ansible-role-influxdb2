@@ -12,6 +12,7 @@ on:
       - master
       - main
       - dependabot/**
+      - renovate/**
       - testing
     paths-ignore:
       - '**/README.md'

@@ -11,6 +11,8 @@ on:
       - master
       - main
       - testing
+      - dependabot/**
+      - renovate/**
     paths-ignore:
       - '**/README.md'
       - '**/CHANGELOG.md'
@@ -40,8 +42,6 @@ jobs:
       - name: ansible-lint
         uses: ansible-community/ansible-lint-action@main
   test:
-    needs:
-      - lint
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
@@ -71,7 +71,9 @@ jobs:
           tag: ${{ matrix.config.tag }}
 
   dependabot:
-    needs: test
+    needs:
+      - lint
+      - test
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'buluma' && github.event_name == 'pull_request'}}
     steps:

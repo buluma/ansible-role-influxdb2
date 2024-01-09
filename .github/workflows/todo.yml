@@ -16,6 +16,8 @@ on:
     tags_ignore:
       - '*'
 
+permissions: write-all
+
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
