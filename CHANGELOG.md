@@ -63,11 +63,14 @@
 **Merged pull requests:**
 
 - Testing [\#2](https://github.com/buluma/ansible-role-influxdb2/pull/2) ([buluma](https://github.com/buluma))
-- Bump actions/setup-python from 2 to 3 [\#1](https://github.com/buluma/ansible-role-influxdb2/pull/1) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v0.1.0](https://github.com/buluma/ansible-role-influxdb2/tree/v0.1.0) (2022-04-01)
 
 [Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/acadffa78f01038127175484f9cc831affff0904...v0.1.0)
+
+**Merged pull requests:**
+
+- Bump actions/setup-python from 2 to 3 [\#1](https://github.com/buluma/ansible-role-influxdb2/pull/1) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 
 
