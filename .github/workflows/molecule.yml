@@ -44,7 +44,7 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     strategy:
-      fail-fast: no
+      fail-fast: false
       matrix:
         config:
           - image: "debian-systemd"
