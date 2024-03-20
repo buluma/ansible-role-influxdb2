@@ -24,4 +24,4 @@ jobs:
     steps:
       - uses: "actions/checkout@master"
       - name: Dependabot Auto Merge Action
-        uses: buluma/dependabot-auto-merge-action@v2.1.1
+        uses: buluma/dependabot-auto-merge-action@v2.1.2
