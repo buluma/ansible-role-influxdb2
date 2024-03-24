@@ -10,10 +10,7 @@ rules:
     level: error
   line-length: disable
   truthy:
-    check-keys: no
-    allowed-values:
-      - "yes"
-      - "no"
+    check-keys: false
 
 ignore: |
   .tox/

@@ -56,6 +56,10 @@ jobs:
             tag: "focal"
           - image: "docker-ubuntu-systemd"
             tag: "bionic"
+          - image: "docker-ubuntu-systemd"
+            tag: "lunar"
+          - image: "docker-ubuntu-systemd"
+            tag: "noble"
           - image: "kali"
             tag: "latest"
     steps:
@@ -79,7 +83,7 @@ jobs:
       - uses: "actions/checkout@master"
       - name: Dependabot metadata
         id: metadata
-        uses: dependabot/fetch-metadata@v1
+        uses: dependabot/fetch-metadata@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Approve a PR
