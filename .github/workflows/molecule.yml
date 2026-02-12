@@ -10,23 +10,14 @@ on:
     branches:
       - master
       - main
-      - testing
-      - dependabot/**
-      # - renovate/**
-    paths-ignore:
-      - '**/README.md'
-      - '**/CHANGELOG.md'
-    tags_ignore:
-      - '*'
   pull_request:
-  pull_request_target:
+    branches:
+      - master
+      - main
   schedule:
-    # - cron: '17 9 9 * *'
-    - cron: '17 9 * * *'
+    - cron: '17 9 9 * *'
 
   workflow_dispatch:
-
-permissions: write-all
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -34,65 +25,70 @@ concurrency:
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v4
       - name: ansible-lint
-        uses: ansible-community/ansible-lint-action@main
-  test:
-    runs-on: ubuntu-22.04
+        uses: ansible/ansible-lint@v25.9.2
+
+  molecule:
+    needs:
+      - lint
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - image: "debian-systemd"
+        distro:
+          - image: "docker-molecule-images"
             tag: "latest"
-          - image: "debian-systemd"
+          - image: "docker-molecule-images"
+            tag: "bookworm"
+          - image: "docker-molecule-images"
             tag: "bullseye"
-          - image: "docker-ubuntu-systemd"
+          - image: "docker-molecule-images"
             tag: "latest"
-          - image: "docker-ubuntu-systemd"
-            tag: "focal"
-          - image: "docker-ubuntu-systemd"
-            tag: "bionic"
-          - image: "docker-ubuntu-systemd"
-            tag: "lunar"
-          - image: "docker-ubuntu-systemd"
-            tag: "noble"
-          - image: "kali"
-            tag: "latest"
+          - image: "docker-molecule-images"
+            tag: "jammy"
+          - image: "docker-molecule-images"
+            tag: "kalilinux"
     steps:
-      - name: Checkout Role
+      - name: checkout
         uses: actions/checkout@v4
         with:
-          path: "${{ github.repository }}"
-      - name: Running Molecule Test
-        uses: buluma/molecule-action@v24.2.0
-        with:
-          image: ${{ matrix.config.image }}
-          tag: ${{ matrix.config.tag }}
+          path: ansible-role-influxdb2
 
-  dependabot:
-    needs:
-      - lint
-      - test
-    runs-on: ubuntu-20.04
-    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'buluma' && github.event_name == 'pull_request'}}
-    steps:
-      - uses: "actions/checkout@master"
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Approve a PR
-        run: gh pr review --approve "$PR_URL"
+          python-version: "3.13"
+
+      - name: Configure Docker for systemd
+        run: |
+          sudo mkdir -p /etc/docker
+          echo '{
+            "features": {
+              "buildkit": true
+            },
+            "exec-opts": ["native.cgroupdriver=systemd"]
+          }' | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker || true
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip3 install ansible molecule molecule-plugins[docker] docker
+
+      - name: Test with molecule
+        run: |
+          cd ansible-role-influxdb2
+          molecule test
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "Merge Dependabot PR"
-        run: gh pr merge --auto --merge "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PY_COLORS: 1
+          ANSIBLE_FORCE_COLOR: 1
+          ANSIBLE_ROLES_PATH: ~/.ansible/roles:${GITHUB_WORKSPACE}/ansible-role-influxdb2
+          image: ${{ matrix.distro.image }}
+          tag: ${{ matrix.distro.tag }}

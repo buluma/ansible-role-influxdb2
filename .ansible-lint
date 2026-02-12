@@ -7,13 +7,9 @@ exclude_paths:
   - molecule/default/prepare.yml
   - molecule/default/converge.yml
   - molecule/default/collections.yml
-  - .tox
   - .cache
   - .github
   - requirements.yml
-
-skip_list:
-  - yaml[truthy]
 
 enable_list:
   - name[prefix]

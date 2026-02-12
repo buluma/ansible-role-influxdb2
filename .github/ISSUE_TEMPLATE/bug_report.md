@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help me improve this role.
+about: Create a report to help me improve
 
 ---
 
@@ -20,7 +20,7 @@ YOUR PLAYBOOK HERE
 
 ## Output
 
-Show at least the error, possible related output, if possible all the output.
+Show at least the error, possible related output, maybe just all the output.
 
 ## Environment
 
