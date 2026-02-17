@@ -7,6 +7,8 @@
 **Closed issues:**
 
 - Update buluma/todo-to-issue-action@v1.0.1 @buluma [\#25](https://github.com/buluma/ansible-role-influxdb2/issues/25)
+- Update action [\#24](https://github.com/buluma/ansible-role-influxdb2/issues/24)
+- rebuild action [\#23](https://github.com/buluma/ansible-role-influxdb2/issues/23)
 
 ## [0.1.7](https://github.com/buluma/ansible-role-influxdb2/tree/0.1.7) (2023-12-09)
 
