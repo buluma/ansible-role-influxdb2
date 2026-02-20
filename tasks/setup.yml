@@ -33,8 +33,8 @@
     name: InfluxDB Repository - RHEL \$releasever
     description: InfluxDB Repository - RHEL \$releasever
     baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
-    enabled: yes
-    gpgcheck: no
+    enabled: true
+    gpgcheck: false
   when: ansible_os_family == 'RedHat'
 
 - name: setup | Ensure InfluxDB packages are installed | Apt
@@ -90,7 +90,7 @@
   ansible.builtin.template:
     dest: /etc/default/influxdb2
     group: root
-    mode: 0644
+    mode: "0644"
     owner: root
     src: etc/default/influxdb2.j2
   notify: Restart InfluxDB
@@ -113,7 +113,7 @@
 - name: setup | Ensure InfluxDB directories exist
   ansible.builtin.file:
     group: influxdb
-    mode: 0750
+    mode: "0750"
     owner: influxdb
     path: "{{ item }}"
     state: directory
@@ -135,7 +135,7 @@
   ansible.builtin.template:
     dest: "{{ influxdb_config_path }}/config.yml"
     group: influxdb
-    mode: 0644
+    mode: "0644"
     owner: influxdb
     src: etc/influxdb/config.yml.j2
   notify: Restart InfluxDB

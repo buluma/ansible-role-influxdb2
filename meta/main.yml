@@ -2,9 +2,9 @@
 galaxy_info:
   author: buluma
   role_name: influxdb2
-  description: 'Install and configure InfluxDB 2.0 using Ansible.'
+  description: "Install and configure InfluxDB 2.0 using Ansible."
   license: MIT
-  min_ansible_version: '2.12
+  min_ansible_version: "2.12"
   platforms:
     - name: Debian
       versions:
