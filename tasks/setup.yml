@@ -54,12 +54,11 @@
   loop: "{{ influxdb_packages }}"
   when: ansible_os_family == 'RedHat'
 
-
 - name: setup | Setup InfluxDB default file
   ansible.builtin.template:
     dest: /etc/default/influxdb2
     group: root
-    mode: '0644'
+    mode: "0644"
     owner: root
     src: etc/default/influxdb2.j2
   notify: Restart InfluxDB
@@ -82,7 +81,7 @@
 - name: setup | Ensure InfluxDB directories exist
   ansible.builtin.file:
     group: influxdb
-    mode: '0750'
+    mode: "0750"
     owner: influxdb
     path: "{{ item }}"
     state: directory
@@ -104,7 +103,7 @@
   ansible.builtin.template:
     dest: "{{ influxdb_config_path }}/config.yml"
     group: influxdb
-    mode: '0644'
+    mode: "0644"
     owner: influxdb
     src: etc/influxdb/config.yml.j2
   notify: Restart InfluxDB
