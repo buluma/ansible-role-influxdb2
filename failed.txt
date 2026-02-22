@@ -1,0 +1,1 @@
+ansible-role-influxdb2 [generator]: ERROR: Unhandled exception when retrieving 'DEFAULT_LOCAL_TMP': [Errno 1] Operation not permitted: '/Users/shadowwalker/.ansible/tmp/ansible-local-847412dlnhu98'
