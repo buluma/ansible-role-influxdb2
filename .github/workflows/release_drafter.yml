@@ -9,14 +9,14 @@ on:
   push:
     # branches to consider in the event; optional, defaults to default
     branches:
-      - master
-      - main
-      - dependabot/**
-      - renovate/**
-      - testing
+    - master
+    - main
+    - dependabot/**
+    - renovate/**
+    - testing
     paths-ignore:
-      - '**/README.md'
-      - '**/CHANGELOG.md'
+    - '**/README.md'
+    - '**/CHANGELOG.md'
   # pull_request event is required only for autolabeler
   pull_request:
     # Only following types are handled by the action, but one can default to all as well
@@ -41,42 +41,42 @@ jobs:
     steps:
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v6
+    - uses: release-drafter/release-drafter@v6
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-        with:
-          config-name: release-drafter.yml
-          disable-autolabeler: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        config-name: release-drafter.yml
+        disable-autolabeler: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   changelog_draft:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout dj-wasabi-release repo
-        uses: actions/checkout@v6
-        with:
-          repository: dj-wasabi/dj-wasabi-release
-          path: dj-wasabi-release
+    - name: Checkout dj-wasabi-release repo
+      uses: actions/checkout@v6
+      with:
+        repository: dj-wasabi/dj-wasabi-release
+        path: dj-wasabi-release
 
-      - name: Checkout current repo
-        uses: actions/checkout@v6
-        with:
-          path: ${{ github.event.repository.default_branch }}
-      - name: Commit Changelog file
-        run: |
-          # We are cloned in the 'default' directory and the dj-wasabi-release
-          # repository is the 'dj-wasabi-release' next to 'default'
-          cd ${{ github.event.repository.default_branch }}
-          # Generate CHANGELOG.md file
-          ../dj-wasabi-release/release.sh -d
-          # Let commit the changes if there are any? (Well there should be!)
-          if [[ $(git status | grep -c 'CHANGELOG.md' || true) -gt 0 ]]
-            then  echo "Committing file"
-                  git config --global user.name 'Shadow Walker [GH bot]'
-                  git config --global user.email 'github@buluma.me.ke'
-                  git add CHANGELOG.md
-                  git commit -m "Updated CHANGELOG.md on \"$(date "+%Y-%m-%d %H:%M:%S")\"" CHANGELOG.md
-                  git push
-          fi
-        env:
-          CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout current repo
+      uses: actions/checkout@v6
+      with:
+        path: ${{ github.event.repository.default_branch }}
+    - name: Commit Changelog file
+      run: |
+        # We are cloned in the 'default' directory and the dj-wasabi-release
+        # repository is the 'dj-wasabi-release' next to 'default'
+        cd ${{ github.event.repository.default_branch }}
+        # Generate CHANGELOG.md file
+        ../dj-wasabi-release/release.sh -d
+        # Let commit the changes if there are any? (Well there should be!)
+        if [[ $(git status | grep -c 'CHANGELOG.md' || true) -gt 0 ]]
+          then  echo "Committing file"
+                git config --global user.name 'Shadow Walker [GH bot]'
+                git config --global user.email 'github@buluma.me.ke'
+                git add CHANGELOG.md
+                git commit -m "Updated CHANGELOG.md on \"$(date "+%Y-%m-%d %H:%M:%S")\"" CHANGELOG.md
+                git push
+        fi
+      env:
+        CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
