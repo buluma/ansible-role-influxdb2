@@ -1,21 +1,21 @@
 ---
-- name: Prepare container
-  hosts: all
-  gather_facts: true
-  become: yes
-  serial: 30%
-  vars:
-    apt_autostart_state: enabled
+  - name: Prepare container
+    hosts: all
+    gather_facts: true
+    become: yes
+    serial: 30%
+    vars:
+      apt_autostart_state: enabled
 
-  roles:
-    - role: buluma.bootstrap
-    - role: buluma.apt_autostart
-    - role: buluma.pip
-    - name: buluma.influxdb2
+    roles:
+      - role: buluma.bootstrap
+      - role: buluma.apt_autostart
+      - role: buluma.pip
+      - name: buluma.influxdb2
 
-  post_tasks:
-    - name: place /environmentfile.txt
-      ansible.builtin.copy:
-        content: "value=influxdb"
-        dest: /environmentfile.txt
-        mode: "0644"
+    post_tasks:
+      - name: place /environmentfile.txt
+        ansible.builtin.copy:
+          content: "value=influxdb"
+          dest: /environmentfile.txt
+          mode: "0644"

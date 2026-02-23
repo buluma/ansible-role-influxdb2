@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Set up Python 3
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -25,7 +25,8 @@ jobs:
         run: sudo apt-get remove --purge -y ansible
 
       - name: Install dependencies
-        run: pip install ansible ansible-lint docker molecule molecule-docker pytest-testinfra
+        run: pip install ansible ansible-lint docker molecule molecule-docker 
+          pytest-testinfra
 
       - name: Display versions
         run: |

@@ -12,78 +12,81 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
 ```yaml
 ---
-- name: Converge
-  hosts: all
-  gather_facts: true
-  become: yes
-  vars:
-    apt_autostart_state: enabled
-    pip_package: python3-pip
-    pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
-    pip_install_packages:
-      - name: setuptools
-      - name: requests
+  - name: Converge
+    hosts: all
+    gather_facts: true
+    become: yes
+    vars:
+      apt_autostart_state: enabled
+      pip_package: python3-pip
+      pip_executable: "{{ 'pip3' if pip_package.startswith('python3') else 'pip' }}"
+      pip_install_packages:
+        - name: setuptools
+        - name: requests
 
-  pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+    pre_tasks:
+      - name: Update apt cache.
+        apt: update_cache=true cache_valid_time=600
+        when: ansible_os_family == 'Debian'
 
-    - name: Set package name for older OSes.
-      ansible.builtin.set_fact:
-        pip_package: python-pip
-      when: >
-        (ansible_os_family == 'RedHat') and (ansible_distribution_major_version | int < 8)
-        or (ansible_distribution == 'Debian') and (ansible_distribution_major_version | int < 10)
-        or (ansible_distribution == 'Ubuntu') and (ansible_distribution_major_version | int < 18)
-  roles:
-    - role: buluma.influxdb2
-      influxdb_orgs:
-        - name: main-org
-          description: Main organization
-        - name: guest-org
+      - name: Set package name for older OSes.
+        ansible.builtin.set_fact:
+          pip_package: python-pip
+        when: >
+          (ansible_os_family == 'RedHat') and (ansible_distribution_major_version
+          | int < 8)
+          or (ansible_distribution == 'Debian') and (ansible_distribution_major_version
+          | int < 10)
+          or (ansible_distribution == 'Ubuntu') and (ansible_distribution_major_version
+          | int < 18)
+    roles:
+      - role: buluma.influxdb2
+        influxdb_orgs:
+          - name: main-org
+            description: Main organization
+          - name: guest-org
 
-      influxdb_users:
-        - name: admin01
-          org: main-org
-          password: secretPassword
-        - name: guest01
-          org: guest-org
-          password: secretPassword
+        influxdb_users:
+          - name: admin01
+            org: main-org
+            password: secretPassword
+          - name: guest01
+            org: guest-org
+            password: secretPassword
 
-      influxdb_buckets:
-        - name: bucket01
-          description: First bucket
-          org: main-org
-          retention: 1d
-        - name: bucket02
-          org: main-org
+        influxdb_buckets:
+          - name: bucket01
+            description: First bucket
+            org: main-org
+            retention: 1d
+          - name: bucket02
+            org: main-org
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/buluma/ansible-role-influxdb2/blob/master/molecule/default/prepare.yml):
 
 ```yaml
 ---
-- name: Prepare container
-  hosts: all
-  gather_facts: true
-  become: yes
-  serial: 30%
-  vars:
-    apt_autostart_state: enabled
+  - name: Prepare container
+    hosts: all
+    gather_facts: true
+    become: yes
+    serial: 30%
+    vars:
+      apt_autostart_state: enabled
 
-  roles:
-    - role: buluma.bootstrap
-    - role: buluma.apt_autostart
-    - role: buluma.pip
-    - name: buluma.influxdb2
+    roles:
+      - role: buluma.bootstrap
+      - role: buluma.apt_autostart
+      - role: buluma.pip
+      - name: buluma.influxdb2
 
-  post_tasks:
-    - name: place /environmentfile.txt
-      ansible.builtin.copy:
-        content: "value=influxdb"
-        dest: /environmentfile.txt
-        mode: "0644"
+    post_tasks:
+      - name: place /environmentfile.txt
+        ansible.builtin.copy:
+          content: "value=influxdb"
+          dest: /environmentfile.txt
+          mode: "0644"
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
