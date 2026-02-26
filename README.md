@@ -98,13 +98,13 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 ```yaml
 ---
 influxdb_dependencies:
-- apt-transport-https
-- curl
-- gnupg
+  - apt-transport-https
+  - curl
+  - gnupg
 
 influxdb_packages:
-- influxdb2
-- influxdb2-cli
+  - influxdb2
+  - influxdb2-cli
 
 influxdb_package_state: present
 
