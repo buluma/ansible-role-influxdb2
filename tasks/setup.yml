@@ -113,7 +113,6 @@
     enabled: "{{ influxdb_service_enabled }}"
     name: "{{ influxdb_service_name }}"
     state: "{{ influxdb_service_state }}"
-
 # - name: Ensure InfluxDB service is in the desired state
 #   ansible.builtin.service:
 #     name: "{{ influxdb_service_name }}"
