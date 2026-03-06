@@ -30,7 +30,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v6
       - name: ansible-lint
-        uses: ansible/ansible-lint@v26.2.0
+        uses: ansible/ansible-lint@v26.3.0
 
   molecule:
     needs:
@@ -73,7 +73,7 @@ jobs:
           sudo systemctl restart docker || true
 
       - name: Install Docker
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Install dependencies
         run: |
