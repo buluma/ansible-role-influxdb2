@@ -8,14 +8,14 @@
     apt_autostart_state: enabled
 
   roles:
-  - role: buluma.bootstrap
-  - role: buluma.apt_autostart
-  - role: buluma.pip
-  - name: buluma.influxdb2
+    - role: buluma.bootstrap
+    - role: buluma.apt_autostart
+    - role: buluma.pip
+    - name: buluma.influxdb2
 
   post_tasks:
-  - name: place /environmentfile.txt
-    ansible.builtin.copy:
-      content: "value=influxdb"
-      dest: /environmentfile.txt
-      mode: "0644"
+    - name: place /environmentfile.txt
+      ansible.builtin.copy:
+        content: "value=influxdb"
+        dest: /environmentfile.txt
+        mode: "0644"
