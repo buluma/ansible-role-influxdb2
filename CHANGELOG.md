@@ -10,6 +10,10 @@
 - Update action [\#24](https://github.com/buluma/ansible-role-influxdb2/issues/24)
 - rebuild action [\#23](https://github.com/buluma/ansible-role-influxdb2/issues/23)
 
+**Merged pull requests:**
+
+- Bump docker/setup-buildx-action from 3 to 4 [\#41](https://github.com/buluma/ansible-role-influxdb2/pull/41) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [0.1.7](https://github.com/buluma/ansible-role-influxdb2/tree/0.1.7) (2023-12-09)
 
 [Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/v0.1.6...0.1.7)
