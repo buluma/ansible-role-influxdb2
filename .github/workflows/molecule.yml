@@ -10,12 +10,16 @@ on:
     branches:
       - master
       - main
+      - codex
+      - testing
   pull_request:
     branches:
       - master
       - main
+      - codex
+      - testing
   schedule:
-    - cron: "17 9 9 * *"
+    - cron: '17 9 9 * *'
 
   workflow_dispatch:
 
@@ -30,7 +34,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v6
       - name: ansible-lint
-        uses: ansible/ansible-lint@v26.3.0
+        uses: ansible/ansible-lint@v26.4.0
 
   molecule:
     needs:
@@ -40,16 +44,16 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - image: "docker-molecule-images"
-            tag: "debian_latest"
-          - image: "docker-molecule-images"
+          - image: "debian"
+            tag: "latest"
+          - image: "debian"
             tag: "bookworm"
-          - image: "docker-molecule-images"
-            tag: "ubuntu_latest"
-          - image: "docker-molecule-images"
+          - image: "debian"
+            tag: "bullseye"
+          - image: "ubuntu"
+            tag: "latest"
+          - image: "ubuntu"
             tag: "jammy"
-          - image: "docker-molecule-images"
-            tag: "kalilinux"
     steps:
       - name: checkout
         uses: actions/checkout@v6
