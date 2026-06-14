@@ -2,6 +2,6 @@
 influxdb_signing_key: "https://repos.influxdata.com/influxdb-archive.key"
 
 influxdb_repositories:
-  - "deb https://repos.influxdata.com/{{ ansible_facts.distribution | lower }} {{ ansible_facts.distribution_release }} stable"
+  - "deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
 
 influxdb_service_name: influxdb
