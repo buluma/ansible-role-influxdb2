@@ -7,32 +7,6 @@
   vars:
     apt_autostart_state: enabled
 
-  pre_tasks:
-    - name: Install python3 and sudo
-      ansible.builtin.raw: |
-        if command -v dnf 2>/dev/null; then
-          dnf install -y python3 sudo
-        elif command -v apt-get 2>/dev/null; then
-          apt-get update -qq && apt-get install -y python3 sudo
-        elif command -v apk 2>/dev/null; then
-          apk update && apk add python3 sudo
-        fi
-      become: false
-      changed_when: true
-
-    - name: Find EXTERNALLY-MANAGED files
-      ansible.builtin.find:
-        paths: /usr/lib
-        patterns: "EXTERNALLY-MANAGED"
-        recurse: true
-      register: externally_managed_files
-
-    - name: Remove EXTERNALLY-MANAGED files
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ externally_managed_files.files }}"
-
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
