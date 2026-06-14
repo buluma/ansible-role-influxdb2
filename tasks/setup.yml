@@ -36,7 +36,7 @@
     baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
     enabled: true
     gpgcheck: true
-    gpgkey: https://repos.influxdata.com/influxdb-archive.key
+    gpgkey: https://repos.influxdata.com/influxdata-archive.key
   when: ansible_facts['os_family'] == 'RedHat'
 
 - name: setup | Ensure InfluxDB packages are installed | Apt
