@@ -16,9 +16,10 @@
   when: ansible_os_family == 'RedHat'
 
 - name: setup | Add InfluxData's key
-  ansible.builtin.apt_key:
-    state: present
+  ansible.builtin.get_url:
     url: "{{ influxdb_signing_key }}"
+    dest: /etc/apt/trusted.gpg.d/influxdb.asc
+    mode: "0644"
   when: ansible_os_family == 'Debian'
 
 - name: setup | Manage InfluxData APT repositories
