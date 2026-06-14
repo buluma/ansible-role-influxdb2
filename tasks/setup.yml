@@ -4,7 +4,7 @@
     name: "{{ influxdb_dependencies }}"
     state: present
     update_cache: true
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: setup | Install python3-dnf
   ansible.builtin.package:
@@ -13,21 +13,21 @@
   with_items:
     - wget
     - tar
-  when: ansible_facts.os_family == 'RedHat'
+  when: ansible_facts['os_family'] == 'RedHat'
 
 - name: setup | Add InfluxData's key
   ansible.builtin.get_url:
     url: "{{ influxdb_signing_key }}"
     dest: /etc/apt/trusted.gpg.d/influxdb.asc
     mode: "0644"
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: setup | Manage InfluxData APT repositories
   ansible.builtin.apt_repository:
     repo: "{{ item }}"
     state: present
   loop: "{{ influxdb_repositories }}"
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: setup | Manage InfluxData Yum repositories
   ansible.builtin.yum_repository:
@@ -37,7 +37,7 @@
     enabled: true
     gpgcheck: true
     gpgkey: https://repos.influxdata.com/influxdb-archive.key
-  when: ansible_facts.os_family == 'RedHat'
+  when: ansible_facts['os_family'] == 'RedHat'
 
 - name: setup | Ensure InfluxDB packages are installed | Apt
   ansible.builtin.apt:
@@ -45,7 +45,7 @@
     state: "{{ influxdb_package_state }}"
     update_cache: true
   loop: "{{ influxdb_packages }}"
-  when: ansible_facts.os_family == 'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 
 - name: setup | Ensure InfluxDB packages are installed | Yum
   ansible.builtin.dnf:
@@ -53,7 +53,7 @@
     state: "{{ influxdb_package_state }}"
     update_cache: true
   loop: "{{ influxdb_packages }}"
-  when: ansible_facts.os_family == 'RedHat'
+  when: ansible_facts['os_family'] == 'RedHat'
 
 - name: setup | Setup InfluxDB default file
   ansible.builtin.template:
