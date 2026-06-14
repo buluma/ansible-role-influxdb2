@@ -2,7 +2,7 @@
 - name: Prepare container
   hosts: all
   gather_facts: false
-  become: yes
+  become: true
   serial: 30%
   vars:
     apt_autostart_state: enabled

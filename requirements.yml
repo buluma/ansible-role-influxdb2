@@ -3,4 +3,4 @@ roles:
   - name: buluma.bootstrap
   - name: buluma.apt_autostart
   - name: buluma.pip
-collections:
+collections: []
