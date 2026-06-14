@@ -13,9 +13,9 @@
         if command -v dnf 2>/dev/null; then
           dnf install -y python3 sudo
         elif command -v apt-get 2>/dev/null; then
-          apt-get install -y python3 sudo
+          apt-get update -qq && apt-get install -y python3 sudo
         elif command -v apk 2>/dev/null; then
-          apk add python3 sudo
+          apk update && apk add python3 sudo
         fi
       become: false
       changed_when: true
