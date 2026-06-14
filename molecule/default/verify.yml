@@ -1,0 +1,16 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Check if influxdb service is running
+      ansible.builtin.service_facts:
+
+    - name: Assert influxdb is active
+      ansible.builtin.assert:
+        that:
+          - "'influxdb' in services"
+          - "services['influxdb']['state'] == 'running'"
+        quiet: true
