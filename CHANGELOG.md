@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/buluma/ansible-role-influxdb2/tree/HEAD)
+## [v26.6.0](https://github.com/buluma/ansible-role-influxdb2/tree/v26.6.0) (2026-06-14)
 
-[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/0.1.7...HEAD)
+[Full Changelog](https://github.com/buluma/ansible-role-influxdb2/compare/0.1.7...v26.6.0)
 
 **Closed issues:**
 
