@@ -52,13 +52,13 @@ jobs:
 
     steps:
       - name: Checkout dj-wasabi-release repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: dj-wasabi/dj-wasabi-release
           path: dj-wasabi-release
 
       - name: Checkout current repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           path: ${{ github.event.repository.default_branch }}
       - name: Commit Changelog file
