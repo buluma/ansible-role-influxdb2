@@ -1,0 +1,14 @@
+---
+name: Bug report
+about: File an issue about a bug
+title: '[BUG] <description>'
+labels: bug
+assignees: ''
+
+---
+name: Feature request
+about: Suggest an enhancement
+title: '[FEATURE] <description>'
+labels: feature
+assignees: ''
+

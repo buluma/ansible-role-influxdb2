@@ -68,3 +68,9 @@ Now I'll get a message that you've added some code. Thank you, really.
 CI starts to test your changes. You can follow the progress on Travis.
 
 Please consider [sponsoring me](https://github.com/sponsors/buluma).
+
+
+## Review Participation
+- All PRs require at least 2 approvals
+- Use @here in PRs for team review
+- Wait 48hrs between review cycles

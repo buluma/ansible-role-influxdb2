@@ -1,0 +1,6 @@
+* @buluma
+*.yml @buluma
+*.yaml @buluma
+tasks/ @buluma
+defaults/ @buluma
+
