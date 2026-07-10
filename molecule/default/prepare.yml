@@ -1,21 +1,18 @@
 ---
-- name: Prepare container
+- name: Prepare
   hosts: all
-  gather_facts: false
   become: true
-  serial: 30%
-  vars:
-    apt_autostart_state: enabled
+  gather_facts: false
+
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo}"
+      become: false
+      changed_when: false
+      failed_when: false
 
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
     - role: buluma.pip
     - role: buluma.influxdb2
-
-  post_tasks:
-    - name: place /environmentfile.txt
-      ansible.builtin.copy:
-        content: "value=influxdb"
-        dest: /environmentfile.txt
-        mode: "0644"
