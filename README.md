@@ -15,7 +15,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 - name: Converge
   hosts: all
   gather_facts: true
-  become: yes
+  become: true
   vars:
     apt_autostart_state: enabled
     pip_package: python3-pip
@@ -26,18 +26,22 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+      ansible.builtin.apt:
+
+        update_cache: true
+
+        cache_valid_time: 600
+      when: ansible_facts['os_family'] == 'Debian'
 
     - name: Set package name for older OSes.
       ansible.builtin.set_fact:
         pip_package: python-pip
       when: >
-        (ansible_os_family == 'RedHat') and (ansible_distribution_major_version
+        (ansible_facts['os_family'] == 'RedHat') and (ansible_facts['distribution_major_version']
         | int < 8)
-        or (ansible_distribution == 'Debian') and (ansible_distribution_major_version
+        or (ansible_facts['distribution'] == 'Debian') and (ansible_facts['distribution_major_version']
         | int < 10)
-        or (ansible_distribution == 'Ubuntu') and (ansible_distribution_major_version
+        or (ansible_facts['distribution'] == 'Ubuntu') and (ansible_facts['distribution_major_version']
         | int < 18)
   roles:
     - role: buluma.influxdb2
@@ -67,26 +71,23 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 
 ```yaml
 ---
-- name: Prepare container
+- name: Prepare
   hosts: all
-  gather_facts: true
-  become: yes
-  serial: 30%
-  vars:
-    apt_autostart_state: enabled
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Install sudo if missing
+      ansible.builtin.raw: "{{ ansible_pkg_mgr | default('dnf') }} install -y sudo}"
+      become: false
+      changed_when: false
+      failed_when: false
 
   roles:
     - role: buluma.bootstrap
     - role: buluma.apt_autostart
     - role: buluma.pip
-    - name: buluma.influxdb2
-
-  post_tasks:
-    - name: place /environmentfile.txt
-      ansible.builtin.copy:
-        content: "value=influxdb"
-        dest: /environmentfile.txt
-        mode: "0644"
+    - role: buluma.influxdb2
 ```
 
 Also see a [full explanation and example](https://buluma.github.io/how-to-use-these-roles.html) on how to use these roles.
@@ -179,12 +180,14 @@ Here is an overview of related roles:
 
 ## [Compatibility](#compatibility)
 
-This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
+This role has been tested on these [container images](https://hub.docker.com/u/buluma):
 
 |container|tags|
 |---------|----|
-|[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
+|[EL](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Debian](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Fedora](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
+|[Ubuntu](https://hub.docker.com/r/buluma/docker-molecule-images)|all|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
@@ -202,6 +205,3 @@ If you find issues, please register them on [GitHub](https://github.com/buluma/a
 
 [buluma](https://buluma.github.io/)
 
-### Get Help
-- Report issues: https://github.com/buluma/ansible-role-influxdb2/issues/new
-- See docs: https://docs.ansible.com/collection/gallery/ansible-role-influxdb2

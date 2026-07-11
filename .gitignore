@@ -5,4 +5,3 @@
 .DS_Store
 .ansible
 results-*.txt
-.gemini-tasks/

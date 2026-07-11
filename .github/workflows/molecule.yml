@@ -44,16 +44,26 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - image: "debian"
-            tag: "latest"
-          - image: "debian"
-            tag: "bookworm"
-          - image: "debian"
-            tag: "bullseye"
-          - image: "ubuntu"
-            tag: "latest"
-          - image: "ubuntu"
-            tag: "jammy"
+          - image: "docker-molecule-images"
+            tag: "rhel9"
+          - image: "docker-molecule-images"
+            tag: "rhel8-ubi"
+          - image: "docker-molecule-images"
+            tag: "debian13"
+          - image: "docker-molecule-images"
+            tag: "debian12"
+          - image: "docker-molecule-images"
+            tag: "debian11"
+          - image: "docker-molecule-images"
+            tag: "fedora44"
+          - image: "docker-molecule-images"
+            tag: "fedora43"
+          - image: "docker-molecule-images"
+            tag: "ubuntu2604"
+          - image: "docker-molecule-images"
+            tag: "ubuntu2404"
+          - image: "docker-molecule-images"
+            tag: "ubuntu2204"
     steps:
       - name: checkout
         uses: actions/checkout@v7
