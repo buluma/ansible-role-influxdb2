@@ -16,4 +16,5 @@ jobs:
       - name: galaxy
         uses: robertdebock/galaxy-action@1.2.1
         with:
+          git_branch: ${{ github.event.repository.default_branch }}
           galaxy_api_key: ${{ secrets.galaxy_api_key }}
