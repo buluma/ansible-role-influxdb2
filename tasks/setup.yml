@@ -30,10 +30,14 @@
   when: ansible_facts['os_family'] == 'Debian'
 
 - name: setup | Manage InfluxData Yum repositories
+  # InfluxData now publishes one universal repo for every RPM distro
+  # (their own docs use this same path regardless of distro/release) -
+  # the old per-$releasever path (.../rhel/$releasever/...) doesn't
+  # exist for Fedora's release numbers and has no packages there.
   ansible.builtin.yum_repository:
     name: influxdb
-    description: InfluxDB Repository - RHEL $releasever
-    baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
+    description: InfluxDB Repository
+    baseurl: https://repos.influxdata.com/stable/$basearch/main
     enabled: true
     gpgcheck: true
     gpgkey: https://repos.influxdata.com/influxdata-archive.key
