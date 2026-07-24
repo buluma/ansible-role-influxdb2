@@ -11,6 +11,6 @@
     - name: Assert influxdb is active
       ansible.builtin.assert:
         that:
-          - "'influxdb' in services"
-          - "services['influxdb']['state'] == 'running'"
+          - "'influxdb.service' in services"
+          - "services['influxdb.service']['state'] == 'running'"
         quiet: true
