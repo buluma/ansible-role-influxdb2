@@ -57,8 +57,6 @@ jobs:
           - image: "docker-molecule-images"
             tag: "debian12"
           - image: "docker-molecule-images"
-            tag: "debian11"
-          - image: "docker-molecule-images"
             tag: "fedora44"
           - image: "docker-molecule-images"
             tag: "fedora43"
