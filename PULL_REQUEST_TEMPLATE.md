@@ -17,4 +17,3 @@
 - [ ] Code follows Ansible best practices
 - [ ] Tests are comprehensive
 - [ ] Documentation is clear
-
