@@ -24,6 +24,6 @@ Show at least the error, possible related output, maybe just all the output.
 
 ## Environment
 
-- Control node OS: [e.g. Debian 9] (`cat /etc/os-release`)
-- Control node Ansible version: [e.g. 2.9.1] (`ansible --version`)
-- Managed node OS: [e.g. CentOS 7] (`cat /etc/os-release`)
+- Control node OS: [e.g. Debian 13] (`cat /etc/os-release`)
+- Control node Ansible version: [e.g. ansible-core 2.22.0] (`ansible --version`)
+- Managed node OS: [e.g. Rocky Linux 10] (`cat /etc/os-release`)
