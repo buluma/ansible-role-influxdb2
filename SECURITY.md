@@ -4,20 +4,14 @@ This software implements other software, it's not very likely that this software
 
 ## [Supported Versions](#supported-versions)
 
-These version of [ansible](https://pypi.org/project/ansible/) are supported:
+CI tests this role with [ansible](https://pypi.org/project/ansible/) 15.0.0. This version of ansible is supported:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 7       | :white_check_mark: |
-| 6       | :white_check_mark: |
-| 5       | :white_check_mark: |
+| 15      | :white_check_mark: |
 
-## [Reporting a Vulnerability](#reporting-a-vulnarability)
+## [Reporting a Vulnerability](#reporting-a-vulnerability)
 
 Please [open an issue](https://github.com/buluma/ansible-role-influxdb2/issues) describing the vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
 
 Please consider [sponsoring me](https://github.com/sponsors/buluma).
